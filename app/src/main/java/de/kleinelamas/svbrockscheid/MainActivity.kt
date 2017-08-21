@@ -32,7 +32,7 @@ class MainActivity : AppCompatActivity() {
         AndroidInjection.inject(this)
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener)
+        navigation.selectedItemId = R.id.navigation_home
     }
 }

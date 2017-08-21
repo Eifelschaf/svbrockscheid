@@ -4,4 +4,4 @@ package de.kleinelamas.svbrockscheid.model
  * @author Matthias Kutscheid
  * Data class for automated parsing
  */
-class LeagueGame(datum: String, zeit: String, ort: String, paar1: String, paar2: String, erg: String, bericht:Int, var typ: String)
+class LeagueGame(val datum: String, val zeit: String, val ort: String, val paar1: String, val paar2: String, val erg: String)

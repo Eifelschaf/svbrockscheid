@@ -31,7 +31,9 @@ class GamesFragment : LifecycleFragment() {
         SVBApp.component.inject(this)
         super.onCreate(savedInstanceState)
         gameData.observe(this, Observer { games ->
-            adapter.games = games
+            games?.let {
+                adapter.leagueHolder = games
+            }
         })
     }
 
@@ -45,6 +47,7 @@ class GamesFragment : LifecycleFragment() {
 
         }
         view?.recyclerView?.layoutManager = LinearLayoutManager(view?.recyclerView?.context, LinearLayoutManager.VERTICAL, false)
+        view?.recyclerView?.adapter = adapter
         return view
     }
 }
