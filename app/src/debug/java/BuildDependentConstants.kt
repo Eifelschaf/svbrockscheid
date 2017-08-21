@@ -3,5 +3,5 @@
  */
 object BuildDependentConstants {
 
-    val URL = "https://kleinelamas.de/svb/"
+    val URL = "https://svbrockscheid.de/"
 }

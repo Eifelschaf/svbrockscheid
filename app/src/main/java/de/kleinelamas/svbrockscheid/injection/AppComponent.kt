@@ -8,9 +8,12 @@ import dagger.android.support.AndroidSupportInjectionModule
 import de.kleinelamas.svbrockscheid.MainActivity
 import de.kleinelamas.svbrockscheid.SVBApp
 import de.kleinelamas.svbrockscheid.connection.ApiClient
+import de.kleinelamas.svbrockscheid.fragments.GamesFragment
+import de.kleinelamas.svbrockscheid.fragments.TeamFragment
+import de.kleinelamas.svbrockscheid.model.GameLiveData
 import javax.inject.Singleton
 
-@Component(modules = arrayOf(AppModule::class, ApiModule::class, AndroidSupportInjectionModule::class, BindingModule::class))
+@Component(modules = arrayOf(AppModule::class, ApiModule::class, AndroidSupportInjectionModule::class, BindingModule::class, DataModule::class))
 @Singleton
 interface AppComponent {
     val context: Context
@@ -26,4 +29,7 @@ interface AppComponent {
 
     fun inject(target: SVBApp)
     fun inject(target: MainActivity)
+    fun inject(target: TeamFragment)
+    fun inject(target: GamesFragment)
+    fun inject(taget: GameLiveData)
 }

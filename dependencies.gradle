@@ -1,0 +1,9 @@
+ext.versions = [
+        kotlin : "1.1.4",
+        supportLib : "26.0.1",
+        glide : "4.0.0",
+        dagger : "2.11",
+        lifecycle : "1.0.0-alpha9",
+        retrofit : "2.3.0",
+        androidPlugin : "3.0.0-beta2",
+]

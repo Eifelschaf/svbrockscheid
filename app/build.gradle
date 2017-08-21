@@ -7,12 +7,13 @@ apply plugin: 'kotlin-kapt'
 apply plugin: 'kotlin-android-extensions'
 
 ext {
-    supportLibVersion = "26.0.1"
-    glideVersion = "4.0.0"
-    daggerVersion = "2.11"
+
 }
 
 android {
+    dataBinding {
+        enabled = true
+    }
     compileSdkVersion 26
     buildToolsVersion "26.0.0"
     defaultConfig {
@@ -38,22 +39,26 @@ android {
 
 dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
-    implementation "org.jetbrains.kotlin:kotlin-stdlib-jre7:$kotlin_version"
-    implementation "com.android.support:appcompat-v7:$supportLibVersion"
-    implementation "com.android.support:design:$supportLibVersion"
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jre7:$versions.kotlin"
+    implementation "com.android.support:appcompat-v7:$versions.supportLib"
+    implementation "com.android.support:design:$versions.supportLib"
     implementation 'com.android.support.constraint:constraint-layout:1.0.2'
-    implementation "com.android.support:support-vector-drawable:$supportLibVersion"
+    implementation "com.android.support:support-vector-drawable:$versions.supportLib"
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'com.android.support.test:runner:1.0.0'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.0'
     implementation 'com.google.code.gson:gson:2.8.1'
-    implementation "com.github.bumptech.glide:glide:$glideVersion"
-    implementation "com.github.bumptech.glide:okhttp3-integration:$glideVersion"
+    implementation "com.github.bumptech.glide:glide:$versions.glide"
+    implementation "com.github.bumptech.glide:okhttp3-integration:$versions.glide"
     implementation 'com.squareup.okhttp3:okhttp:3.8.1'
-    implementation 'com.squareup.retrofit2:retrofit:2.3.0'
-    implementation "com.google.dagger:dagger-android:$daggerVersion"
-    implementation "com.google.dagger:dagger-android-support:$daggerVersion"
-    kapt "com.google.dagger:dagger-android-processor:$daggerVersion"
-    kapt "com.google.dagger:dagger-compiler:$daggerVersion"
-    implementation 'com.squareup.retrofit2:converter-gson:2.3.0'
+    implementation "com.google.dagger:dagger-android:$versions.dagger"
+    implementation "com.google.dagger:dagger-android-support:$versions.dagger"
+    implementation "android.arch.lifecycle:runtime:$versions.lifecycle"
+    implementation "android.arch.lifecycle:extensions:$versions.lifecycle"
+    implementation "com.squareup.retrofit2:retrofit:$versions.retrofit"
+    implementation "com.squareup.retrofit2:converter-gson:$versions.retrofit"
+    kapt "com.google.dagger:dagger-android-processor:$versions.dagger"
+    kapt "com.google.dagger:dagger-compiler:$versions.dagger"
+    kapt "android.arch.lifecycle:compiler:$versions.lifecycle"
+    kapt "com.android.databinding:compiler:$versions.androidPlugin"
 }
