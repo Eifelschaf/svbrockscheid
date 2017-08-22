@@ -11,6 +11,8 @@
     android:layout_marginStart="8dp"
     android:layout_marginTop="8dp"
     android:textAlignment="center"
+    android:textAppearance="@style/TextAppearance.AppCompat.Headline"
+    android:textColor="?attr/colorPrimaryDark"
     tools:text="KREISLIGA">
 
 </TextView>

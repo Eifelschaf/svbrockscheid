@@ -37,21 +37,28 @@ class LeagueAdapter: RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     }
 
     private fun getItem(position: Int): LeagueGame? {
-        return when(position) {
-            in 1..leagueHolder!!.kreisliga1.size -> leagueHolder!!.kreisliga1[position]
-            in leagueHolder!!.kreisliga1.size + 1..leagueHolder!!.kreisliga2.size -> leagueHolder!!.kreisliga2[position]
-            in leagueHolder!!.kreisliga2.size + 1..leagueHolder!!.kreispokal.size -> leagueHolder!!.kreispokal[position]
-            else -> null
+        leagueHolder?.let { leagueHolder ->
+            return when(position) {
+                in 1..leagueHolder.kreisliga1.size + 1 -> leagueHolder.kreisliga1[position-1]
+                in leagueHolder.kreisliga1.size + 2..leagueHolder.kreisliga1.size + leagueHolder.kreisliga2.size + 2 -> leagueHolder.kreisliga2[position - leagueHolder.kreisliga1.size - 2]
+                in leagueHolder.kreisliga1.size + leagueHolder.kreisliga2.size + 3..itemCount -> leagueHolder.kreispokal[position - leagueHolder.kreisliga1.size - leagueHolder.kreisliga2.size - 3]
+                else -> null
+            }
         }
+        return null
+
     }
 
     override fun getItemViewType(position: Int): Int {
-        return when(position) {
-            0,
-            leagueHolder!!.kreisliga1.size,
-            leagueHolder!!.kreisliga1.size + 1 + leagueHolder!!.kreisliga2.size-> headerView
-            else -> itemView
+        leagueHolder?.let { leagueHolder ->
+            return when(position) {
+                0,
+                leagueHolder.kreisliga1.size + 1,
+                leagueHolder.kreisliga1.size + leagueHolder.kreisliga2.size + 2-> headerView
+                else -> itemView
+            }
         }
+        return itemView
     }
 
     override fun onCreateViewHolder(parent: ViewGroup?, viewType: Int): RecyclerView.ViewHolder {
@@ -65,7 +72,12 @@ class LeagueAdapter: RecyclerView.Adapter<RecyclerView.ViewHolder>() {
         if (holder is ViewHolder) {
             holder.binding.game = getItem(position)
         } else if (holder is TitleHolder) {
-            holder.title.text = "TITLE"
+            holder.title.text = when(position) {
+                0 -> "Kreisliga D"
+                leagueHolder!!.kreisliga1.size + 1 -> "Winterpause"
+                leagueHolder!!.kreisliga1.size + leagueHolder!!.kreisliga2.size + 2 -> "Bitburger Kreispokal"
+                else -> "TITLE"
+            }
         }
     }
 
