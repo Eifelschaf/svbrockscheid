@@ -16,16 +16,16 @@
 
         <TextView
             android:id="@+id/datum"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
-            android:layout_toLeftOf="@+id/ergebnis"
+            android:layout_marginEnd="8dp"
             android:layout_toStartOf="@+id/ergebnis"
             android:gravity="start"
             android:text="@{game.datum + ' ' + game.zeit}"
             android:textAppearance="?android:attr/textAppearanceSmall"
             android:textColor="?android:attr/textColorSecondary"
+            app:layout_constraintEnd_toStartOf="@+id/ergebnis"
             app:layout_constraintStart_toStartOf="@+id/paar1"
             app:layout_constraintTop_toTopOf="@+id/ort"
             tools:text="22.11.1985" />
@@ -35,40 +35,36 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"
-            android:layout_alignParentRight="true"
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
             android:layout_toEndOf="@+id/ergebnis"
-            android:layout_toRightOf="@+id/ergebnis"
             android:gravity="end"
             android:text="@{game.ort}"
             android:textAppearance="?android:attr/textAppearanceSmall"
             android:textColor="?android:attr/textColorSecondary"
             app:layout_constraintEnd_toEndOf="@+id/paar2"
-            app:layout_constraintStart_toEndOf="@+id/datum"
+            app:layout_constraintStart_toEndOf="@+id/ergebnis"
             app:layout_constraintTop_toTopOf="parent"
             tools:text="Brockscheid" />
 
         <TextView
             android:id="@+id/paar1"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_alignParentLeft="true"
+            android:layout_height="25dp"
             android:layout_alignParentStart="true"
             android:layout_below="@+id/datum"
             android:layout_marginBottom="8dp"
             android:layout_marginEnd="8dp"
             android:layout_marginStart="16dp"
-            android:layout_marginTop="8dp"
-            android:layout_toLeftOf="@+id/ergebnis"
+            android:layout_marginTop="4dp"
             android:layout_toStartOf="@+id/ergebnis"
             android:gravity="start"
             android:text="@{game.paar1}"
             android:textAppearance="?android:attr/textAppearanceMedium"
-            app:layout_constraintBottom_toBottomOf="@+id/ergebnis"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/ergebnis"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/ergebnis"
+            app:layout_constraintTop_toBottomOf="@+id/datum"
             tools:text="SVB" />
 
         <TextView
@@ -84,12 +80,13 @@
             android:gravity="center_horizontal"
             android:text="@{game.erg}"
             android:textAppearance="?android:attr/textAppearanceMedium"
+            android:textColor="?attr/colorPrimaryDark"
             android:textIsSelectable="true"
             android:textSize="25sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/ort"
+            app:layout_constraintTop_toTopOf="parent"
             tools:text="3:0" />
 
         <TextView
@@ -97,22 +94,19 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"
-            android:layout_alignParentRight="true"
             android:layout_alignTop="@+id/paar1"
-            android:layout_marginBottom="8dp"
             android:layout_marginEnd="16dp"
             android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
             android:layout_toEndOf="@+id/ergebnis"
-            android:layout_toRightOf="@+id/ergebnis"
             android:gravity="end"
             android:text="@{game.paar2}"
             android:textAppearance="?android:attr/textAppearanceMedium"
-            app:layout_constraintBottom_toBottomOf="@+id/ergebnis"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/ergebnis"
-            app:layout_constraintTop_toTopOf="@+id/ergebnis"
-            tools:text="SVA" />
+            tools:text="SVA"
+            app:layout_constraintTop_toTopOf="@+id/paar1"
+            android:layout_marginTop="8dp"
+            app:layout_constraintBottom_toBottomOf="@+id/paar1" />
     </android.support.constraint.ConstraintLayout>
 
 </layout>
