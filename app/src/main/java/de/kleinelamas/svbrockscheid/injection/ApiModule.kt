@@ -3,6 +3,7 @@ package de.kleinelamas.svbrockscheid.injection
 import android.content.Context
 import dagger.Module
 import dagger.Provides
+import de.kleinelamas.svbrockscheid.BuildDependentConstants
 import de.kleinelamas.svbrockscheid.connection.ApiClient
 import retrofit2.Retrofit
 import okhttp3.Cache

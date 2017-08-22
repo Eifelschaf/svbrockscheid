@@ -20,7 +20,6 @@ class SVBApp : Application(), HasActivityInjector {
 
     override fun onCreate() {
         super.onCreate()
-
         component = DaggerAppComponent.builder()
                 .application(this)
                 .build()
