@@ -29,9 +29,10 @@ class LeagueAdapter: RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     override fun getItemCount(): Int {
         var count = 0
         leagueHolder?.let { leagueHolder ->
+            if (!leagueHolder.kreispokal.isEmpty()) { count += leagueHolder.kreispokal.size + 1}
             if (!leagueHolder.kreisliga1.isEmpty()) { count += leagueHolder.kreisliga1.size + 1}
             if (!leagueHolder.kreisliga2.isEmpty()) { count += leagueHolder.kreisliga2.size + 1}
-            if (!leagueHolder.kreispokal.isEmpty()) { count += leagueHolder.kreispokal.size + 1} }
+        }
 
         return count
     }
@@ -39,9 +40,9 @@ class LeagueAdapter: RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     private fun getItem(position: Int): LeagueGame? {
         leagueHolder?.let { leagueHolder ->
             return when(position) {
-                in 1..leagueHolder.kreisliga1.size + 1 -> leagueHolder.kreisliga1[position-1]
-                in leagueHolder.kreisliga1.size + 2..leagueHolder.kreisliga1.size + leagueHolder.kreisliga2.size + 2 -> leagueHolder.kreisliga2[position - leagueHolder.kreisliga1.size - 2]
-                in leagueHolder.kreisliga1.size + leagueHolder.kreisliga2.size + 3..itemCount -> leagueHolder.kreispokal[position - leagueHolder.kreisliga1.size - leagueHolder.kreisliga2.size - 3]
+                in 1..leagueHolder.kreispokal.size + 1 -> leagueHolder.kreispokal[position-1]
+                in leagueHolder.kreispokal.size + 2..leagueHolder.kreispokal.size + leagueHolder.kreisliga1.size + 2 -> leagueHolder.kreisliga1[position - leagueHolder.kreispokal.size - 2]
+                in leagueHolder.kreispokal.size + leagueHolder.kreisliga1.size + 3..itemCount -> leagueHolder.kreisliga2[position - leagueHolder.kreispokal.size - leagueHolder.kreisliga1.size - 3]
                 else -> null
             }
         }
@@ -53,8 +54,8 @@ class LeagueAdapter: RecyclerView.Adapter<RecyclerView.ViewHolder>() {
         leagueHolder?.let { leagueHolder ->
             return when(position) {
                 0,
-                leagueHolder.kreisliga1.size + 1,
-                leagueHolder.kreisliga1.size + leagueHolder.kreisliga2.size + 2-> headerView
+                leagueHolder.kreispokal.size + 1,
+                leagueHolder.kreispokal.size + leagueHolder.kreisliga1.size + 2-> headerView
                 else -> itemView
             }
         }
@@ -73,9 +74,9 @@ class LeagueAdapter: RecyclerView.Adapter<RecyclerView.ViewHolder>() {
             holder.binding.game = getItem(position)
         } else if (holder is TitleHolder) {
             holder.title.text = when(position) {
-                0 -> "Kreisliga D"
-                leagueHolder!!.kreisliga1.size + 1 -> "Winterpause"
-                leagueHolder!!.kreisliga1.size + leagueHolder!!.kreisliga2.size + 2 -> "Bitburger Kreispokal"
+                0 -> "Bitburger Kreispokal"
+                leagueHolder!!.kreispokal.size + 1 -> "Kreisliga D"
+                leagueHolder!!.kreispokal.size + leagueHolder!!.kreisliga1.size + 2 -> "Winterpause"
                 else -> "TITLE"
             }
         }
