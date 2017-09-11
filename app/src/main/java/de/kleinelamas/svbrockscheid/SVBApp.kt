@@ -15,6 +15,7 @@ import javax.inject.Inject
 class SVBApp : Application(), HasActivityInjector {
 
     @Inject lateinit var activityInjector: DispatchingAndroidInjector<Activity>
+    lateinit var fabricProxy: FabricProxy
 
     override fun activityInjector(): AndroidInjector<Activity> = activityInjector
 
@@ -24,6 +25,7 @@ class SVBApp : Application(), HasActivityInjector {
                 .application(this)
                 .build()
         component.inject(this)
+        fabricProxy = FabricProxy()
     }
 
     companion object {

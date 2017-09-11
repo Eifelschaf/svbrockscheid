@@ -6,6 +6,7 @@ import dagger.BindsInstance
 import dagger.Component
 import dagger.android.support.AndroidSupportInjectionModule
 import de.kleinelamas.svbrockscheid.FabricProxy
+import de.kleinelamas.svbrockscheid.firebase.FirebaseService
 import de.kleinelamas.svbrockscheid.MainActivity
 import de.kleinelamas.svbrockscheid.SVBApp
 import de.kleinelamas.svbrockscheid.connection.ApiClient
@@ -32,6 +33,7 @@ interface AppComponent {
     fun inject(target: MainActivity)
     fun inject(target: TeamFragment)
     fun inject(target: GamesFragment)
-    fun inject(taget: GameLiveData)
+    fun inject(target: GameLiveData)
     fun inject(target: FabricProxy)
+    fun inject(target: FirebaseService)
 }
