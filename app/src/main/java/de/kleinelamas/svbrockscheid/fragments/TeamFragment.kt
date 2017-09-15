@@ -10,6 +10,7 @@ import android.view.ViewGroup
 import de.kleinelamas.svbrockscheid.R
 import de.kleinelamas.svbrockscheid.SVBApp
 import de.kleinelamas.svbrockscheid.TeamAdapter
+import de.kleinelamas.svbrockscheid.helpers.SpacesItemDecoration
 import de.kleinelamas.svbrockscheid.model.TeamLiveData
 import kotlinx.android.synthetic.main.fragment_team.view.*
 import javax.inject.Inject
@@ -39,8 +40,8 @@ class TeamFragment : LifecycleFragment() {
         refreshLayout?.setOnRefreshListener {
             // TODO: get the data
         }
-        //view?.recyclerView?.layoutManager = GridLayoutManager(container?.context, 2)
         view?.recyclerView?.adapter = adapter
+        view?.recyclerView?.addItemDecoration(SpacesItemDecoration(resources.getDimensionPixelSize(R.dimen.spacing)))
         return view
     }
 }
