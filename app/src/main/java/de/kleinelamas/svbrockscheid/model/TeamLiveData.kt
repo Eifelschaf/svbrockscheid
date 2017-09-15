@@ -2,6 +2,7 @@ package de.kleinelamas.svbrockscheid.model
 
 import android.arch.lifecycle.LiveData
 import android.os.AsyncTask
+import android.util.Log
 import de.kleinelamas.svbrockscheid.SVBApp
 import de.kleinelamas.svbrockscheid.connection.ApiClient
 import retrofit2.Call
@@ -10,7 +11,7 @@ import javax.inject.Inject
 /**
  * @author Matthias Kutscheid
  */
-class GameLiveData : LiveData<LeagueHolder>() {
+class TeamLiveData : LiveData<TeamHolder>() {
 
     init {
         SVBApp.component.inject(this)
@@ -21,13 +22,13 @@ class GameLiveData : LiveData<LeagueHolder>() {
     override fun onActive() {
 
         super.onActive()
-        val task = object : AsyncTask<Void, Void, LeagueHolder>(){
-            override fun doInBackground(vararg p0: Void?): LeagueHolder {
-                //get all league games
-                return LeagueHolder(handleGames(apiClient.getKreisliga1Games()), handleGames(apiClient.getKreisliga2Games()), handleGames(apiClient.getKreispokalGames()))
+        val task = object : AsyncTask<Void, Void, TeamHolder>() {
+            override fun doInBackground(vararg p0: Void?): TeamHolder? {
+                //get all players
+                return handleTeam(apiClient.getTeam())
             }
 
-            override fun onPostExecute(result: LeagueHolder) {
+            override fun onPostExecute(result: TeamHolder?) {
                 super.onPostExecute(result)
                 value = result
             }
@@ -36,9 +37,10 @@ class GameLiveData : LiveData<LeagueHolder>() {
         task.execute(null)
     }
 
-    private fun handleGames(call: Call<ArrayList<LeagueGame>>): Array<LeagueGame>{
+    private fun handleTeam(call: Call<HashMap<String, Array<Player>>>): TeamHolder? {
         val response = call.execute()
-        response.body()?.let { return it.toTypedArray() }
-        return arrayOf()
+        Log.e("TAG", response.raw().body().toString())
+        response.body()?.let { return TeamHolder(it) }
+        return null
     }
 }

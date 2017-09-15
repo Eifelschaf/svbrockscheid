@@ -60,6 +60,7 @@ dependencies {
     kapt "com.google.dagger:dagger-compiler:$versions.dagger"
     kapt "android.arch.lifecycle:compiler:$versions.lifecycle"
     kapt "com.android.databinding:compiler:$versions.androidPlugin"
+    kapt "com.github.bumptech.glide:compiler:$versions.glide"
     compile('com.crashlytics.sdk.android:crashlytics:2.6.8@aar') {
         transitive = true
     }

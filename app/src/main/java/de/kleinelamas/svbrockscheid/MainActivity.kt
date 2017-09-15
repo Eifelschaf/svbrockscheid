@@ -8,6 +8,7 @@ import android.view.Menu
 import android.view.MenuItem
 import dagger.android.AndroidInjection
 import de.kleinelamas.svbrockscheid.fragments.GamesFragment
+import de.kleinelamas.svbrockscheid.fragments.TeamFragment
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
@@ -27,6 +28,12 @@ class MainActivity : AppCompatActivity() {
                 return@OnNavigationItemSelectedListener true
             }
             R.id.navigation_players -> {
+                val transaction = supportFragmentManager.beginTransaction()
+                transaction.replace(R.id.fragmentContainer, TeamFragment(), null)
+                if (currentFragment != null) {
+                    transaction.addToBackStack("")
+                }
+                transaction.commit()
                 return@OnNavigationItemSelectedListener true
             }
         }

@@ -1,18 +1,37 @@
 package de.kleinelamas.svbrockscheid.fragments
 
+import android.arch.lifecycle.LifecycleFragment
+import android.arch.lifecycle.Observer
 import android.os.Bundle
-import android.support.v4.app.Fragment
 import android.support.v4.widget.SwipeRefreshLayout
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import de.kleinelamas.svbrockscheid.R
+import de.kleinelamas.svbrockscheid.SVBApp
+import de.kleinelamas.svbrockscheid.TeamAdapter
+import de.kleinelamas.svbrockscheid.model.TeamLiveData
 import kotlinx.android.synthetic.main.fragment_team.view.*
+import javax.inject.Inject
 
 /**
  * @author Matthias Kutscheid
  */
-class TeamFragment: Fragment() {
+class TeamFragment : LifecycleFragment() {
+
+    @Inject lateinit var teamData: TeamLiveData
+    private val adapter: TeamAdapter = TeamAdapter()
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        SVBApp.component.inject(this)
+        super.onCreate(savedInstanceState)
+        teamData.observe(this, Observer { team ->
+            team?.let {
+                adapter.teamHolder = team
+            }
+        })
+    }
+
     override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         // Inflate the layout for this fragment
         val view = inflater?.inflate(R.layout.fragment_team, container, false)
@@ -20,6 +39,8 @@ class TeamFragment: Fragment() {
         refreshLayout?.setOnRefreshListener {
             // TODO: get the data
         }
+        //view?.recyclerView?.layoutManager = GridLayoutManager(container?.context, 2)
+        view?.recyclerView?.adapter = adapter
         return view
     }
 }
