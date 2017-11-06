@@ -18,11 +18,15 @@ class TeamLiveData : LiveData<TeamHolder>() {
     }
 
     @Inject lateinit var apiClient: ApiClient
+    var task: AsyncTask<Void, Void, TeamHolder>? = null
 
     override fun onActive() {
-
         super.onActive()
-        val task = object : AsyncTask<Void, Void, TeamHolder>() {
+        refresh()
+    }
+
+    fun refresh() {
+        task = object : AsyncTask<Void, Void, TeamHolder>() {
             override fun doInBackground(vararg p0: Void?): TeamHolder? {
                 //get all players
                 return handleTeam(apiClient.getTeam())
@@ -34,7 +38,7 @@ class TeamLiveData : LiveData<TeamHolder>() {
             }
 
         }
-        task.execute(null)
+        task?.execute()
     }
 
     private fun handleTeam(call: Call<HashMap<String, Array<Player>>>): TeamHolder? {

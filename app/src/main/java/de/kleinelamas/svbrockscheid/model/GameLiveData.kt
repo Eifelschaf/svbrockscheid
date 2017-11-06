@@ -12,6 +12,8 @@ import javax.inject.Inject
  */
 class GameLiveData : LiveData<LeagueHolder>() {
 
+    var task: AsyncTask<Void, Void, LeagueHolder>? = null
+
     init {
         SVBApp.component.inject(this)
     }
@@ -19,9 +21,12 @@ class GameLiveData : LiveData<LeagueHolder>() {
     @Inject lateinit var apiClient: ApiClient
 
     override fun onActive() {
-
         super.onActive()
-        val task = object : AsyncTask<Void, Void, LeagueHolder>(){
+        refresh()
+    }
+
+    fun refresh() {
+        task = object : AsyncTask<Void, Void, LeagueHolder>() {
             override fun doInBackground(vararg p0: Void?): LeagueHolder {
                 //get all league games
                 return LeagueHolder(handleGames(apiClient.getKreisliga1Games()), handleGames(apiClient.getKreisliga2Games()), handleGames(apiClient.getKreispokalGames()))
@@ -31,9 +36,8 @@ class GameLiveData : LiveData<LeagueHolder>() {
                 super.onPostExecute(result)
                 value = result
             }
-
         }
-        task.execute(null)
+        task?.execute(null)
     }
 
     private fun handleGames(call: Call<ArrayList<LeagueGame>>): Array<LeagueGame>{

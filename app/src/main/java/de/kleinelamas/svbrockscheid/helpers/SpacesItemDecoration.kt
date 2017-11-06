@@ -23,11 +23,16 @@ class SpacesItemDecoration(private val space: Int) : RecyclerView.ItemDecoration
         parent.layoutManager.baseline
         val lastRowLength = parent.childCount % spanCount
         if (layoutPosition < parent.childCount - if (lastRowLength == 0) spanCount else lastRowLength) {
-            outRect.bottom = space
+            outRect.bottom = space / 2
+        } else if (layoutPosition > spanCount) {
+            outRect.top = space / 2
         }
 
+        // add half a space on each side to nor mess up the scaling of the views
         if (layoutPosition % spanCount == 0) {
-            outRect.right = space
+            outRect.right = space / 2
+        } else {
+            outRect.left = space / 2
         }
     }
 }
