@@ -83,9 +83,11 @@ class TeamAdapter : RecyclerView.Adapter<ViewHolder>() {
 
     override fun onBindViewHolder(holder: ViewHolder?, position: Int) {
         getItem(position)?.let { (player, position) ->
-            holder?.binding?.player = player
-            holder?.binding?.position = position
-            GlideApp.with(holder?.itemView).load(BuildDependentConstants.URL + "bilder/team/" + player.bild).placeholder(R.drawable.ic_player).into(holder?.binding?.image)
+            holder?.let { holder ->
+                holder.binding.player = player
+                holder.binding.position = position
+                GlideApp.with(holder.itemView).load(BuildDependentConstants.URL + "bilder/team/" + player.bild).placeholder(R.drawable.ic_player).into(holder.binding.image)
+            }
         }
     }
 
