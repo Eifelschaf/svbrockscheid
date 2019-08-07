@@ -1,12 +1,13 @@
 package de.kleinelamas.svbrockscheid.fragments
 
-import android.arch.lifecycle.Observer
 import android.os.Bundle
-import android.support.v4.app.Fragment
-import android.support.v7.widget.LinearLayoutManager
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import de.kleinelamas.svbrockscheid.LeagueAdapter
 import de.kleinelamas.svbrockscheid.R
 import de.kleinelamas.svbrockscheid.SVBApp
@@ -42,7 +43,7 @@ class GamesFragment : Fragment() {
             // get the data
             gameData.refresh()
         }
-        view?.recyclerView?.layoutManager = LinearLayoutManager(view?.recyclerView?.context, LinearLayoutManager.VERTICAL, false)
+        view?.recyclerView?.layoutManager = LinearLayoutManager(view?.recyclerView?.context, RecyclerView.VERTICAL, false)
         view?.recyclerView?.adapter = adapter
         return view
     }

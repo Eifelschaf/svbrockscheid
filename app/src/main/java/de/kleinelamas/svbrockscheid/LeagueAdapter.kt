@@ -1,10 +1,10 @@
 package de.kleinelamas.svbrockscheid
 
-import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.recyclerview.widget.RecyclerView
 import de.kleinelamas.svbrockscheid.databinding.ListItemGameBinding
 import de.kleinelamas.svbrockscheid.model.LeagueGame
 import de.kleinelamas.svbrockscheid.model.LeagueHolder
@@ -62,14 +62,14 @@ class LeagueAdapter: RecyclerView.Adapter<RecyclerView.ViewHolder>() {
         return itemView
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup?, viewType: Int): RecyclerView.ViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         return when(viewType) {
-            itemView -> ViewHolder(ListItemGameBinding.inflate(LayoutInflater.from(parent?.context), parent, false))
-            else -> TitleHolder(LayoutInflater.from(parent?.context).inflate(R.layout.list_item_title, parent, false))
+            itemView -> ViewHolder(ListItemGameBinding.inflate(LayoutInflater.from(parent.context), parent, false))
+            else -> TitleHolder(LayoutInflater.from(parent.context).inflate(R.layout.list_item_title, parent, false))
         }
     }
 
-    override fun onBindViewHolder(holder: RecyclerView.ViewHolder?, position: Int) {
+    override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         if (holder is ViewHolder) {
             holder.binding.game = getItem(position)
         } else if (holder is TitleHolder) {

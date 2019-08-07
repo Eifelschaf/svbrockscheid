@@ -6,7 +6,7 @@
 
     <application
         android:name=".SVBApp"
-        android:allowBackup="true"
+        android:allowBackup="false"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
@@ -28,11 +28,6 @@
             android:value="641ac10f2b9e27b1c4e40e34dc5b3a501632f6c8" />
 
         <activity android:name=".AboutActivity"/>
-        <service android:name=".firebase.FirebaseService" android:exported="false">
-            <intent-filter>
-                <action android:name="com.google.firebase.INSTANCE_ID_EVENT"/>
-            </intent-filter>
-        </service>
         <service android:name=".firebase.MessagingService" android:exported="false">
             <intent-filter>
                 <action android:name="com.google.firebase.MESSAGING_EVENT"/>

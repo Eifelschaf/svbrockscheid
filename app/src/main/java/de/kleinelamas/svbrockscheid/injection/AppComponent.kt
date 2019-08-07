@@ -10,7 +10,7 @@ import de.kleinelamas.svbrockscheid.MainActivity
 import de.kleinelamas.svbrockscheid.SVBApp
 import de.kleinelamas.svbrockscheid.TeamAdapter
 import de.kleinelamas.svbrockscheid.connection.ApiClient
-import de.kleinelamas.svbrockscheid.firebase.FirebaseService
+import de.kleinelamas.svbrockscheid.firebase.MessagingService
 import de.kleinelamas.svbrockscheid.fragments.GamesFragment
 import de.kleinelamas.svbrockscheid.fragments.TeamFragment
 import de.kleinelamas.svbrockscheid.model.GameLiveData
@@ -37,7 +37,7 @@ interface AppComponent {
     fun inject(target: GamesFragment)
     fun inject(target: GameLiveData)
     fun inject(target: FabricProxy)
-    fun inject(target: FirebaseService)
+    fun inject(target: MessagingService)
     fun inject(target: TeamLiveData)
     fun inject(target: TeamAdapter)
 }

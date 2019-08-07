@@ -1,8 +1,8 @@
 package de.kleinelamas.svbrockscheid
 
-import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.recyclerview.widget.RecyclerView
 import de.kleinelamas.svbrockscheid.connection.ApiClient
 import de.kleinelamas.svbrockscheid.databinding.ListItemPlayerBinding
 import de.kleinelamas.svbrockscheid.glide.GlideApp
@@ -81,18 +81,16 @@ class TeamAdapter : RecyclerView.Adapter<ViewHolder>() {
         return null
     }
 
-    override fun onBindViewHolder(holder: ViewHolder?, position: Int) {
+    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         getItem(position)?.let { (player, position) ->
-            holder?.let { holder ->
-                holder.binding.player = player
-                holder.binding.position = position
-                GlideApp.with(holder.itemView).load(BuildDependentConstants.URL + "bilder/team/" + player.bild).placeholder(R.drawable.ic_player).into(holder.binding.image)
-            }
+            holder.binding.player = player
+            holder.binding.position = position
+            GlideApp.with(holder.itemView).load(BuildDependentConstants.URL + "bilder/team/" + player.bild).placeholder(R.drawable.ic_player).into(holder.binding.image)
         }
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup?, viewType: Int): ViewHolder {
-        return ViewHolder(ListItemPlayerBinding.inflate(LayoutInflater.from(parent?.context), parent, false))
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
+        return ViewHolder(ListItemPlayerBinding.inflate(LayoutInflater.from(parent.context), parent, false))
     }
 }
 

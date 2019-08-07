@@ -1,9 +1,9 @@
 package de.kleinelamas.svbrockscheid.helpers
 
 import android.graphics.Rect
-import android.support.v7.widget.GridLayoutManager
-import android.support.v7.widget.RecyclerView
 import android.view.View
+import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 
 
 /**
@@ -20,7 +20,7 @@ class SpacesItemDecoration(private val space: Int) : RecyclerView.ItemDecoration
             spanCount = it.spanCount
         }
 
-        parent.layoutManager.baseline
+        parent.layoutManager?.baseline
         val lastRowLength = parent.childCount % spanCount
         if (layoutPosition < parent.childCount - if (lastRowLength == 0) spanCount else lastRowLength) {
             outRect.bottom = space / 2

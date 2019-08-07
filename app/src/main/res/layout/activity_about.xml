@@ -5,7 +5,8 @@
     <data>
         <variable name="handler" type="de.kleinelamas.svbrockscheid.AboutActivity"/>
     </data>
-<android.support.constraint.ConstraintLayout
+
+    <androidx.constraintlayout.widget.ConstraintLayout
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="de.kleinelamas.svbrockscheid.AboutActivity">
@@ -24,5 +25,5 @@
         tools:layout_editor_absoluteX="16dp"
         tools:layout_editor_absoluteY="16dp"
         android:onClick="@{handler::onIcons8LinkClicked}"/>
-</android.support.constraint.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

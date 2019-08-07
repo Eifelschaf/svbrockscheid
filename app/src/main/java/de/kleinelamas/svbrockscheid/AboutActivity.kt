@@ -1,11 +1,11 @@
 package de.kleinelamas.svbrockscheid
 
 import android.content.Intent
-import android.databinding.DataBindingUtil
 import android.net.Uri
-import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
+import androidx.appcompat.app.AppCompatActivity
+import androidx.databinding.DataBindingUtil
 import de.kleinelamas.svbrockscheid.databinding.ActivityAboutBinding
 
 class AboutActivity : AppCompatActivity() {

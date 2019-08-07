@@ -1,8 +1,8 @@
 package de.kleinelamas.svbrockscheid.model
 
-import android.arch.lifecycle.LiveData
 import android.os.AsyncTask
 import android.util.Log
+import androidx.lifecycle.LiveData
 import de.kleinelamas.svbrockscheid.SVBApp
 import de.kleinelamas.svbrockscheid.connection.ApiClient
 import retrofit2.Call

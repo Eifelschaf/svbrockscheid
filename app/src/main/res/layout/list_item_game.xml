@@ -10,7 +10,7 @@
             type="de.kleinelamas.svbrockscheid.model.LeagueGame" />
     </data>
 
-    <android.support.constraint.ConstraintLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
@@ -107,6 +107,6 @@
             app:layout_constraintTop_toTopOf="@+id/paar1"
             android:layout_marginTop="8dp"
             app:layout_constraintBottom_toBottomOf="@+id/paar1" />
-    </android.support.constraint.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 </layout>
