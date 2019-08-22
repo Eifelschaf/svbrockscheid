@@ -19,22 +19,22 @@ class MessagingService: FirebaseMessagingService() {
         SVBApp.component.inject(this)
     }
 
-    override fun onNewToken(newToken: String?) {
+    override fun onNewToken(newToken: String) {
         super.onNewToken(newToken)
         val pushResponse = apiClient.sendPushToken(newToken)
         //ignore the response for now
         pushResponse.execute()
     }
 
-    override fun onMessageReceived(message: RemoteMessage?) {
+    override fun onMessageReceived(message: RemoteMessage) {
         super.onMessageReceived(message)
-        message?.data?.let {
+        message.data.let {
             if (it.isNotEmpty()) {
                 Log.d("NOTIFICATION!", "data received: $it")
             }
         }
 
-        message?.notification?.body?.let {
+        message.notification?.body?.let {
             Log.d("NOTIFICATION!", "notificationBody: $it")
         }
     }

@@ -43,7 +43,7 @@ class TeamLiveData : LiveData<TeamHolder>() {
 
     private fun handleTeam(call: Call<HashMap<String, Array<Player>>>): TeamHolder? {
         val response = call.execute()
-        Log.e("TAG", response.raw().body().toString())
+        Log.e("TAG", response.raw().body.toString())
         response.body()?.let { return TeamHolder(it) }
         return null
     }

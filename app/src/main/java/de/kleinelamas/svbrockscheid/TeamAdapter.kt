@@ -1,6 +1,7 @@
 package de.kleinelamas.svbrockscheid
 
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import de.kleinelamas.svbrockscheid.connection.ApiClient
@@ -13,7 +14,11 @@ import javax.inject.Inject
 /**
  * @author Matthias Kutscheid
  */
-class TeamAdapter : RecyclerView.Adapter<ViewHolder>() {
+class TeamAdapter(private val selectionListener: SelectionListener) : RecyclerView.Adapter<ViewHolder>() {
+
+    interface SelectionListener {
+        fun onPlayerSelected(player: Player, view: View)
+    }
 
     init {
         SVBApp.component.inject(this)
@@ -45,37 +50,37 @@ class TeamAdapter : RecyclerView.Adapter<ViewHolder>() {
         var playerPosition: String? = null
 
         // find the correct player
-        teamHolder?.let {
-            val calculatePositionOrReturn: (Array<Player>) -> Unit = {
+        teamHolder?.let { holder: TeamHolder ->
+            val calculatePositionOrReturn: (Array<Player>) -> Unit = { players ->
                 if (remainingPosition > -1) {
-                    if (remainingPosition < it.size) {
-                        player = it[remainingPosition]
+                    if (remainingPosition < players.size) {
+                        player = players[remainingPosition]
                     }
-                    remainingPosition -= it.size
+                    remainingPosition -= players.size
                 }
             }
             playerPosition = "Torhüter"
-            it.getTorhueter()?.let(calculatePositionOrReturn)
+            holder.getTorhueter()?.let(calculatePositionOrReturn)
             if (remainingPosition > -1) {
                 playerPosition = "Abwehr"
             }
-            it.getAbwehr()?.let(calculatePositionOrReturn)
+            holder.getAbwehr()?.let(calculatePositionOrReturn)
             if (remainingPosition > -1) {
                 playerPosition = "Mittelfeld"
             }
-            it.getMittelfeld()?.let(calculatePositionOrReturn)
+            holder.getMittelfeld()?.let(calculatePositionOrReturn)
             if (remainingPosition > -1) {
                 playerPosition = "Angriff"
             }
-            it.getAngriff()?.let(calculatePositionOrReturn)
+            holder.getAngriff()?.let(calculatePositionOrReturn)
             if (remainingPosition > -1) {
                 playerPosition = "Trainer"
             }
-            it.getTrainer()?.let(calculatePositionOrReturn)
+            holder.getTrainer()?.let(calculatePositionOrReturn)
         }
-        player?.let { player ->
+        player?.let {
             playerPosition?.let { playerPosition ->
-                return PlayerData(player, playerPosition)
+                return PlayerData(it, playerPosition)
             }
         }
         return null
@@ -85,6 +90,9 @@ class TeamAdapter : RecyclerView.Adapter<ViewHolder>() {
         getItem(position)?.let { (player, position) ->
             holder.binding.player = player
             holder.binding.position = position
+            holder.binding.root.setOnClickListener {
+                selectionListener.onPlayerSelected(player, it)
+            }
             GlideApp.with(holder.itemView).load(BuildDependentConstants.URL + "bilder/team/" + player.bild).placeholder(R.drawable.ic_player).into(holder.binding.image)
         }
     }
